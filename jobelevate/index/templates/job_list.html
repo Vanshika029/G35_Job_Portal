@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Listings - JobElevate</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Reuse your existing CSS -->
+</head>
+<body>
+    <h1>Available Jobs</h1>
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <ul>
+    {% for job in jobs %}
+        <li>
+            {{ job.title }} - {{ job.company }} ({{ job.location }}) - Deadline: {{ job.deadline }}
+            <form method="post" action="{% url 'add_to_wishlist' job.id %}">
+                {% csrf_token %}
+                <select name="priority">
+                    <option value="HP">High Priority</option>
+                    <option value="DJ">Dream Job</option>
+                    <option value="BP">Backup Plan</option>
+                </select>
+                <button type="submit">Add to Wishlist</button>
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'wishlist' %}">View Wishlist</a> | <a href="{% url 'home' %}">Home</a>
+</body>
+</html>

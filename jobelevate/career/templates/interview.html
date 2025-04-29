@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ...existing code... -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .card-header {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+    <header style="background-color: #1f4a40; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center;">
+            <!-- <img src="{% static 'logo.png' %}" alt="JobElevate Logo" style="height: 40px; margin-right: 10px;"> -->
+            
+            <img style="width: 80px; height: 60px; padding-left: 10px;" src="{% static 'images/logo.PNG' %}" alt="logo">
+            <h1 style="margin: 0; font-size: 1.5rem; color: white;">JobElevate</h1>
+        </div>
+        <nav style="display: flex; gap: 15px;display:flex ; align-items: center;">
+            <a href="/" style="color: white; text-decoration: none; font-size: 1rem;">Home</a>
+           
+            <a href="/skill-development" style="color: white; text-decoration: none; font-size: 1rem;">Skill Development</a>
+        </nav>
+    </header>
+    <!-- ...existing code... -->
+    <div class="container mt-5">
+        <h2 class="mb-4" style="text-align: center; color: #1f4a40; text-decoration: underline;">Frequently Asked Interview Questions</h2>
+        <br>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <!-- Question 1 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer1">
+                        <strong>1. What is your greatest strength?</strong>
+                    </div>
+                    <div id="answer1" class="collapse">
+                        <div class="card-body">
+                            My greatest strength is my ability to adapt to new challenges and learn quickly.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 2 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer2">
+                        <strong>2. What is your greatest weakness?</strong>
+                    </div>
+                    <div id="answer2" class="collapse">
+                        <div class="card-body">
+                            My greatest weakness is that I sometimes focus too much on details, but I am working on balancing this.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 3 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer3">
+                        <strong>3. Why do you want to work here?</strong>
+                    </div>
+                    <div id="answer3" class="collapse">
+                        <div class="card-body">
+                            I admire the company's mission and values, and I believe my skills align with the role's requirements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 4 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer4">
+                        <strong>4. Tell me about a challenge you faced and how you overcame it.</strong>
+                    </div>
+                    <div id="answer4" class="collapse">
+                        <div class="card-body">
+                            I once managed a tight deadline by prioritizing tasks and collaborating effectively with my team.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 5 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer5">
+                        <strong>5. Where do you see yourself in five years?</strong>
+                    </div>
+                    <div id="answer5" class="collapse">
+                        <div class="card-body">
+                            In five years, I see myself growing within this company, taking on new challenges, and contributing to its success.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 6 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer6">
+                        <strong>6. Why should we hire you?</strong>
+                    </div>
+                    <div id="answer6" class="collapse">
+                        <div class="card-body">
+                            I bring a unique combination of skills, experience, and passion that aligns perfectly with the role's requirements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 7 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer7">
+                        <strong>7. Can you describe a time when you worked in a team?</strong>
+                    </div>
+                    <div id="answer7" class="collapse">
+                        <div class="card-body">
+                            I worked on a project where collaboration was key, and we successfully delivered results by leveraging each other's strengths.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 8 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer8">
+                        <strong>8. How do you handle stress and pressure?</strong>
+                    </div>
+                    <div id="answer8" class="collapse">
+                        <div class="card-body">
+                            I handle stress by staying organized, prioritizing tasks, and taking short breaks to maintain focus.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 9 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer9">
+                        <strong>9. What motivates you?</strong>
+                    </div>
+                    <div id="answer9" class="collapse">
+                        <div class="card-body">
+                            I am motivated by opportunities to learn, grow, and make a meaningful impact in my work.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 10 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer10">
+                        <strong>10. How do you prioritize your work?</strong>
+                    </div>
+                    <div id="answer10" class="collapse">
+                        <div class="card-body">
+                            I prioritize my work by assessing deadlines, importance, and impact, and then creating a structured plan to tackle tasks efficiently.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 11 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer11">
+                        <strong>11. How do you handle feedback?</strong>
+                    </div>
+                    <div id="answer11" class="collapse">
+                        <div class="card-body">
+                            I handle feedback by listening carefully, reflecting on it, and using it as an opportunity for growth and improvement.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 12 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer12">
+                        <strong>12. Can you describe a time when you had to learn something quickly?</strong>
+                    </div>
+                    <div id="answer12" class="collapse">
+                        <div class="card-body">
+                            I had to quickly learn a new software tool for a project, and I did so by dedicating extra hours to study and practice.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 13 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer13">
+                        <strong>13. How do you stay organized?</strong>
+                    </div>
+                    <div id="answer13" class="collapse">
+                        <div class="card-body">
+                            I stay organized by using tools like calendars, to-do lists, and project management software to keep track of tasks and deadlines.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 14 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer14">
+                        <strong>14. What are your career goals?</strong>
+                    </div>
+                    <div id="answer14" class="collapse">
+                        <div class="card-body">
+                            My career goals include advancing in my field, taking on leadership roles, and continuously improving my skills.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 15 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer15">
+                        <strong>15. How do you handle conflicts at work?</strong>
+                    </div>
+                    <div id="answer15" class="collapse">
+                        <div class="card-body">
+                            I handle conflicts by addressing them calmly, listening to all parties involved, and finding a mutually beneficial solution.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 16 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer16">
+                        <strong>16. What do you do to stay current in your field?</strong>
+                    </div>
+                    <div id="answer16" class="collapse">
+                        <div class="card-body">
+                            I stay current by attending industry conferences, participating in webinars, and reading relevant publications.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 17 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer17">
+                        <strong>17. How do you handle tight deadlines?</strong>
+                    </div>
+                    <div id="answer17" class="collapse">
+                        <div class="card-body">
+                            I handle tight deadlines by prioritizing tasks, staying focused, and communicating effectively with my team.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 18 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer18">
+                        <strong>18. Can you describe a time when you went above and beyond?</strong>
+                    </div>
+                    <div id="answer18" class="collapse">
+                        <div class="card-body">
+                            I went above and beyond by taking on additional responsibilities during a critical project to ensure its success.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 19 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer19">
+                        <strong>19. How do you handle failure?</strong>
+                    </div>
+                    <div id="answer19" class="collapse">
+                        <div class="card-body">
+                            I handle failure by analyzing what went wrong, learning from the experience, and applying those lessons to future endeavors.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Question 20 -->
+            <div class="col">
+                <div class="card">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#answer20">
+                        <strong>20. Do you have any questions for us?</strong>
+                    </div>
+                    <div id="answer20" class="collapse">
+                        <div class="card-body">
+                            Yes, I would like to know more about the company's future goals and how I can contribute to achieving them.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+    <!-- ...existing code... -->
+</body>
+</html>

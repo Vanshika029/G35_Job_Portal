@@ -1,0 +1,411 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<style>
+    a {
+    text-decoration: none;
+    color: #333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+/* Filters Section */
+.filters {
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters h3, .filters h4 {
+    margin-bottom: 10px;
+}
+
+.filters label {
+    display: block;
+    margin: 5px 0;
+}
+
+/* Job Listings */
+.job-listings {
+    flex: 1;
+    margin-left: 20px;
+}
+
+/* Job Card */
+.job-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease-in-out;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Job Card Header */
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.company-logo {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+
+.job-card h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.company {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Icons & Details */
+.job-details {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.job-details span {
+    display: inline-block;
+    margin-right: 10px;
+    color: #666;
+}
+
+/* Skills & Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.tags span {
+    background: #e0e0e0;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #333;
+}
+
+/* Footer */
+.job-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+}
+
+.save-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0073e6;
+    font-weight: bold;
+}
+
+.apply-btn {
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    /* Removed hover effect */
+}
+
+.job-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.job-title h2 {
+    margin: 0;
+}
+</style>
+<div class="container" style="margin: 10%;">
+    <aside class="filters">
+        <form method="GET" action="{% url 'itjobs' %}">
+            <h3>All Filters</h3>
+            <h4>Salary</h4>
+            <label>
+                <input type="checkbox" name="salary" value="0-3" {% if '0-3' in request.GET.salary %}checked{% endif %}> 0-3 Lakhs
+            </label>
+            <label>
+                <input type="checkbox" name="salary" value="3-6" {% if '3-6' in request.GET.salary %}checked{% endif %}> 3-6 Lakhs
+            </label>
+            <label>
+                <input type="checkbox" name="salary" value="6-10" {% if '6-10' in request.GET.salary %}checked{% endif %}> 6-10 Lakhs
+            </label>
+            <label>
+                <input type="checkbox" name="salary" value="10-15" {% if '10-15' in request.GET.salary %}checked{% endif %}> 10-15 Lakhs
+            </label>
+            <h4>Location</h4>
+            <label>
+                <input type="checkbox" name="location" value="Bengaluru" {% if 'Bengaluru' in request.GET.location %}checked{% endif %}> Bengaluru
+            </label>
+            <label>
+                <input type="checkbox" name="location" value="Hyderabad" {% if 'Hyderabad' in request.GET.location %}checked{% endif %}> Hyderabad
+            </label>
+            <label>
+                <input type="checkbox" name="location" value="Pune" {% if 'Pune' in request.GET.location %}checked{% endif %}> Pune
+            </label>
+            <label>
+                <input type="checkbox" name="location" value="Delhi/NCR" {% if 'Delhi/NCR' in request.GET.location %}checked{% endif %}> Delhi/NCR
+            </label>
+            <button type="submit">Apply Filters</button>
+        </form>
+    </aside>
+
+    <main class="job-listings">
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2><a href="{% url 'it1' %}">Systems Analyst 1-IT</a></h2>
+                        <p class="company"><strong>Oracle</strong> <span class="rating">⭐ 3.7</span> <span class="reviews">5154 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Systems Analyst 1-IT&company=Oracle" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/oracle.jpeg' %}" alt="Oracle Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 0-2 Yrs | 💰 Not disclosed | 📍 Kolkata, Mumbai, N...</p>
+                <p>📄 Provide support to internal users of Oracle Applications and legacy applications.</p>
+                <p class="tags">
+                    <span>Training</span>
+                    <span>Oracle Apps</span>
+                    <span>Usage</span>
+                    <span>Infrastructure</span>
+                    <span>Manager Technology</span>
+                    <span>Analyst 1</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 3 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2><a href="{% url 'it2' %}">Hiring Freshers | Service Desk Analyst</a></h2>
+                        <p class="company"><strong>Wipro</strong> <span class="rating">⭐ 3.7</span> <span class="reviews">52080 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Hiring Freshers | Service Desk Analyst&company=Wipro" class="apply-btn" style="background-color:#1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/wipro.png' %}" alt="Wipro Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 0 Yrs | 💰 Not disclosed | 📍Bengaluru(Kodathi)</p>
+                <p>📄 Shifts: 24*7 (5 days of work from office).</p>
+                <p class="tags">
+                    <span>Communication Skills</span>
+                    <span>English</span>
+                    <span>Technical Support</span>
+                    <span>Computer Skills</span>
+                    <span>Spoken</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 1 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Urgent opening For Site Reliability Engineer- Azure</h2>
+                        <p class="company"><strong>HDFC Bank</strong> <span class="rating">⭐ 3.9</span> <span class="reviews">38942 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Urgent opening For Site Reliability Engineer- Azure&company=HDFC Bank" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/hdfc.jpeg' %}" alt="HDFC Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 4-9 Yrs | 💰 5.5-13 Lacs PA | 📍Gurugram,Bengaluru</p>
+                <p>📄 Minimum 4 years of experience in SRE role with strong knowledge of Azure...</p>
+                <p class="tags">
+                    <span>Reliability Engineering</span>
+                    <span>Site Reliability Engineering</span>
+                    <span>Azure Devops</span>
+                    <span>Azure</span>
+                    <span>SRE</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 4 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Software Engr</h2>
+                        <p class="company"><strong>Honeywell</strong> <span class="rating">⭐ 3.8</span> <span class="reviews">1315 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Software Engr&company=Honeywell" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/honeywell.PNG' %}" alt="Honeywell Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 0-5 Yrs | 💰 Not disclosed | 📍Greater Noida,Bengaluru</p>
+                <p>📄 Proficient in front-end technologies (HTML,CSS 3,Bootstrap 4 /5,JavaScript...</p>
+                <p class="tags">
+                    <span>Application design</span>
+                    <span>Front end</span>
+                    <span>NoSQL</span>
+                    <span>Aerospace</span>
+                    <span>Software Engineer</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 1 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Technical Lead - Angular+Node+Typescript Mumbai & Banglore</h2>
+                        <p class="company"><strong>Citiustech</strong> <span class="rating">⭐ 3.4</span> <span class="reviews">1618 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Technical Lead - Angular+Node+Typescript Mumbai & Banglore&company=Citiustech" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/citius.jpeg' %}" alt="CitiusTech Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 5-10 Yrs | 💰 Not disclosed | 📍Mumbai,Pune,Bengaluru</p>
+                <p>📄 Please find details and minimum 05 to 09 years experience is</p>
+                <p class="tags">
+                    <span>Application design</span>
+                    <span>Front end</span>
+                    <span>NoSQL</span>
+                    <span>Aerospace</span>
+                    <span>Software Engineer</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 1 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Java + Selenium + BDD/Cucumber</h2>
+                        <p class="company"><strong>Capgemini</strong> <span class="rating">⭐ 3.7</span> <span class="reviews">40803 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Java + Selenium + BDD/Cucumber&company=Capgemini" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/cape.PNG' %}" alt="Capgemini Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 4-9 Yrs | 💰 Not disclosed | 📍Hybrid- Pune,Chennai</p>
+                <p>📄 Should have thorough technical, analytical and operational knowledge</p>
+                <p class="tags">
+                    <span>Automation Testing</span>
+                    <span>Selenium Java</span>
+                    <span>Bdd Cucumber</span>
+                    <span>Software testing</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 1 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Cognizant - Walk-in Interview For Angular Developer - 15th Feb Drive</h2>
+                        <p class="company"><strong>Cognizant</strong> <span class="rating">⭐ 3.8</span> <span class="reviews">49167 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Cognizant - Walk-in Interview For Angular Developer - 15th Feb Drive&company=Cognizant" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/cog.PNG' %}" alt="Cognizant Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 4-9 Yrs | 💰 Not disclosed | 📍Hybrid- Pune,Chennai</p>
+                <p>📄 4 to 12 years of experience in Angular, HTML, CSS and JavaScript</p>
+                <p class="tags">
+                    <span>Angular</span>
+                    <span>CSS</span>
+                    <span>Javascript</span>
+                    <span>HTML</span>
+                    <span>Development</span>
+                    <span>Interviewing</span>
+                    <span>Drives</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 1 Days Ago</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-title">
+                    <div>
+                        <h2>Senior Engineer/ Engineer_ MLOPs_ 3 To 9yrs</h2>
+                        <p class="company"><strong>Fractal Analytics</strong> <span class="rating">⭐ 4.0</span> <span class="reviews">775 Reviews</span></p>
+                    </div>
+                    <a href="{% url 'apply' %}?job_title=Senior Engineer/ Engineer_ MLOPs_ 3 To 9yrs&company=Fractal Analytics" class="apply-btn" style="background-color: #1f4a40; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; font-weight: bold;">Apply</a>
+                </div>
+                <img src="{% static 'images/frac.png' %}" alt="Fractal Analytics Logo" class="company-logo">
+            </div>
+            <div class="job-details">
+                <p>📅 3-12 Yrs | 💰 Not disclosed | 📍Mumbai,Pune,Chennai,Gurugram,Bengaluru</p>
+                <p>📄 Build the knowledge base required to deliver increasingly complex MLOPS</p>
+                <p class="tags">
+                    <span>Cloud Computing</span>
+                    <span>C++</span>
+                    <span>Automation</span>
+                    <span>Project Management</span>
+                    <span>System Integration</span>
+                </p>
+            </div>
+            <div class="job-footer">
+                <p>🕒 4 Days Ago</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; background-color: #1f4a40; color: #ffffff; padding: 1rem; border-radius: 0 0 8px 8px; z-index: 1000; box-shadow: 0 0px 0 rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; align-items: center;">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 40px; margin-right: 1rem;">
+            <h2 style="margin: 0;">JobElevate</h2>
+        </div>
+        <a href="/" style="color: #ffffff; text-decoration: none; font-size: 1rem; padding: 0.5rem 1rem;">Home</a>
+    </header>
+
+    {% block content %}
+    <div style="margin: 8% auto; max-width: 1200px; padding: 2rem; border: 3px solid var(--primary-dark); border-radius: 10px; background-color: var(--background); box-shadow: var(--shadow-lg);">
+        <div class="container">
+            <div class="right-panel">
+                <h1 style="text-align: center; font-size: 2.5rem; color: var(--primary-dark);">Dashboard</h1>
+                <p class="subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-light);">Manage Job Postings</p>
+                <h2 style="text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 1.5rem;">Your Job Posts</h2>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px; background-color: var(--white); box-shadow: var(--shadow); border-radius: 10px; overflow: hidden;">
+                    <thead>
+                        <tr style="background-color: var(--primary-dark); color: var(--white);">
+                            <th style="padding: 15px; border: 1px solid var(--primary-dark); text-align: left;">Company</th>
+                            <th style="padding: 15px; border: 1px solid var(--primary-dark); text-align: left;">Job Title</th>
+                            <th style="padding: 15px; border: 1px solid var(--primary-dark); text-align: left;">Salary</th>
+                            <th style="padding: 15px; border: 1px solid var(--primary-dark); text-align: left;">Location</th>
+                            <th style="padding: 15px; border: 1px solid var(--primary-dark); text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in job_posts %}
+                            <tr style="border: 1px solid var(--primary-dark);">
+                                <td style="padding: 15px; color: var(--text);">{{ job.company }}</td>
+                                <td style="padding: 15px; color: var(--text);">{{ job.job_title }}</td>
+                                <td style="padding: 15px; color: var(--text);">{{ job.salary }}</td>
+                                <td style="padding: 15px; color: var(--text);">{{ job.location }}</td>
+                                <td style="padding: 15px; text-align: center;">
+                                    <a href="{% url 'update_job' job.id %}" class="btn" style="background-color: var(--primary); color: var(--white); padding: 10px 15px; text-decoration: none; border-radius: 5px; margin-right: 5px;">Update</a>
+                                    <form action="{% url 'delete_job' job.id %}" method="post" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn" style="background-color: var(--accent); color: var(--white); padding: 10px 15px; border: none; border-radius: 5px;">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" style="padding: 15px; text-align: center; color: var(--text-light);">No jobs posted yet.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

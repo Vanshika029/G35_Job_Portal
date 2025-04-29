@@ -1,0 +1,364 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Professional Details</title>
+    <style>
+        :root {
+            --primary-color: #1f4a40;
+            --secondary-color: #5fb19e;
+            --accent-color: #34d399;
+            --background-color: #f4f7fa;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1e293b;
+            --error-color: #ef4444;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-color), #e2e8f0);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), #2a6656);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        header img {
+            width: 80px;
+            height: 60px;
+            padding-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        header img:hover {
+            transform: scale(1.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* header nav a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        } */
+
+        /* header nav a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        } */
+
+        header nav a:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 120px auto 2rem;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            animation: fadeInScale 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        h1.hero_title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+        .form-group:nth-child(6) { animation-delay: 0.6s; }
+        .form-group:nth-child(7) { animation-delay: 0.7s; }
+        .form-group:nth-child(8) { animation-delay: 0.8s; }
+        .form-group:nth-child(9) { animation-delay: 0.9s; }
+        .form-group:nth-child(10) { animation-delay: 1.0s; }
+
+        .form-group label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            color: #64748b;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 12px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group input:not(:placeholder-shown),
+        .form-group select:not(:placeholder-shown) {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(95, 177, 158, 0.2);
+        }
+
+        .form-group input:focus + label,
+        .form-group select:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group select:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+            background: var(--card-bg);
+            padding: 0 6px;
+        }
+
+        .form-group input:invalid:not(:placeholder-shown),
+        .form-group select:invalid:not(:placeholder-shown) {
+            border-color: var(--error-color);
+        }
+
+        .button-group {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .submit-btn {
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .submit-btn:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-100%); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 100px 1rem 1rem;
+                padding: 1.5rem;
+            }
+
+            h1.hero_title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.75rem 1rem;
+            }
+
+            header img {
+                width: 60px;
+                height: 45px;
+            }
+
+            header nav a {
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <img src="{% static 'images/logo.PNG' %}" alt="JobElevate Logo">
+            <h1>JobElevate</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            
+        </nav>
+    </header>
+    <div class="container">
+        <h1 class="hero_title">Professional Details</h1>
+        <form method="post" action="{% url 'submit_professional_details' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="designation" name="designation" placeholder=" " required>
+                <label for="designation">Current Designation</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="company" name="company" placeholder=" " required>
+                <label for="company">Current Company</label>
+            </div>
+            <div class="form-group">
+                <input type="number" id="experience" name="experience" placeholder=" " required min="0">
+                <label for="experience">Years of Experience</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="skills" name="skills" placeholder=" " required>
+                <label for="skills">Key Skills</label>
+            </div>
+            <div class="form-group">
+                <input type="number" id="tenth_marks" name="tenth_marks" placeholder=" " required min="0" max="100">
+                <label for="tenth_marks">10th Marks (%)</label>
+            </div>
+            <div class="form-group">
+                <input type="number" id="twelfth_marks" name="twelfth_marks" placeholder=" " required min="0" max="100">
+                <label for="twelfth_marks">12th Marks (%)</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="graduation_degree" name="graduation_degree" placeholder=" " required>
+                <label for="graduation_degree">Graduation Degree</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="graduation_institute" name="graduation_institute" placeholder=" " required>
+                <label for="graduation_institute">Graduation Institute</label>
+            </div>
+            <div class="form-group">
+                <input type="number" id="graduation_year" name="graduation_year" placeholder=" " required min="1900" max="2100">
+                <label for="graduation_year">Year of Graduation</label>
+            </div>
+            <div class="form-group">
+                <select id="location" name="location" placeholder=" " required>
+                    <option value="" disabled selected></option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Bangalore">Bangalore</option>
+                    <option value="Hyderabad">Hyderabad</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Pune">Pune</option>
+                </select>
+                <label for="location">Preferred Job Location</label>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Handle form submission feedback
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const submitBtn = document.querySelector('.submit-btn');
+
+            form.addEventListener('submit', () => {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

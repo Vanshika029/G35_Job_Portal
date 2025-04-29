@@ -1,0 +1,48 @@
+
+{% block title %}Contact{% endblock %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %} 
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Contact</title>
+</head>
+<body>
+    <header style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; background-color: #1f4a40; color: #ffffff; padding: 1rem; border-radius: 0 0 8px 8px; z-index: 1000; box-shadow: 0 0px 0 rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; align-items: center;">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 40px; margin-right: 1rem;">
+            <h2 style="margin: 0;">JobElevate</h2>
+        </div>
+        <a href="/" style="color: #ffffff; text-decoration: none; font-size: 1rem; padding: 0.5rem 1rem;">Home</a>
+    </header>
+<!-- Contact section -->
+<section class="contact" style="margin: 80px;">
+    <div class="container">
+        <div class="contact_wrapper" style="margin: auto;">
+            <div class="contact_info">
+                <h1>Get in touch</h1>
+                <p>Most viewed and all-time top-selling services.</p>
+                <img src="{% static 'images/contact.svg' %}" alt="contact">
+            </div>
+            <form id="contact_form" method="post" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" autocomplete="off" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" autocomplete="off" required>
+                <label for="message">Message:</label>
+                <textarea name="message" id="message" placeholder="Message..." autocomplete="off" required rows="5"></textarea>
+                <button type="submit" class="g_btn" style="background-color: #1f4a40; color: #ffffff; cursor: pointer;">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+{% endblock %}

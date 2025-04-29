@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <style>
+        .update-table tr:hover, .update-table td:hover {
+            background-color: inherit !important;
+        }
+    </style>
+</head>
+<body>
+    <header style="position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; background-color: #1f4a40; color: #ffffff; padding: 1rem; border-radius: 0 0 8px 8px; z-index: 1000; box-shadow: 0 0px 0 rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; align-items: center;">
+            <img src="/static/images/logo.png" alt="Logo" style="height: 40px; margin-right: 1rem;">
+            <h2 style="margin: 0;">JobElevate</h2>
+        </div>
+        <a href="/" style="color: #ffffff; text-decoration: none; font-size: 1rem; padding: 0.5rem 1rem;">Home</a>
+    </header>
+
+
+{% load static %}
+
+
+{% block content %}
+<div style="max-width: 1000px; padding: 2rem; border: 3px solid var(--primary-dark); border-radius: 10px; background-color: var(--background); box-shadow: var(--shadow-lg); padding-left: 100px; margin-top: 100px; margin: 5% auto;">
+    <div class="container">
+        <div class="right-panel">
+            <h1 style="text-align: center; font-size: 2.5rem; color: var(--primary-dark);">UPDATE JOB</h1>
+            <p class="subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-light);">Modify job details</p>
+            <form method="post" action="{% url 'update_job' job.id %}">
+                {% csrf_token %}
+                <table class="update-table" style="margin: 20px auto 0 auto; border: 3px solid var(--primary-dark); font-size: 1.2rem; width: 90%; background-color: var(--white); box-shadow: var(--shadow); border-radius: 10px;">
+                    <tr style="background-color: var(--primary-dark); color: var(--white);">
+                        <th style="border: 3px solid var(--primary-dark); padding: 1rem;">Field</th>
+                        <th style="border: 3px solid var(--primary-dark); padding: 1rem;">Value</th>
+                    </tr>
+                    <tr>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem; color: var(--text);"><label for="company">Company<span>*</span></label></td>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem;"><input type="text" id="company" name="company" value="{{ job.company }}" required style="width: 100%; padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid var(--primary-dark);"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem; color: var(--text);"><label for="job_title">Job Title<span>*</span></label></td>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem;"><input type="text" id="job_title" name="job_title" value="{{ job.job_title }}" required style="width: 100%; padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid var(--primary-dark);"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem; color: var(--text);"><label for="salary">Salary<span>*</span></label></td>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem;"><input type="text" id="salary" name="salary" value="{{ job.salary }}" required style="width: 100%; padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid var(--primary-dark);"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem; color: var(--text);"><label for="location">Location<span>*</span></label></td>
+                        <td style="border: 3px solid var(--primary-dark); padding: 1rem;"><input type="text" id="location" name="location" value="{{ job.location }}" required style="width: 100%; padding: 0.8rem; font-size: 1rem; border-radius: 5px; border: 1px solid var(--primary-dark);"></td>
+                    </tr>
+                </table>
+                <div class="button-group" style="margin-top: 2rem; text-align: center;">
+                    <button type="submit" class="btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; background-color: var(--primary); color: var(--white); border-radius: 5px;">Update Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

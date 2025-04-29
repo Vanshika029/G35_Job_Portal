@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Details Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1f4a40;
+            --secondary-color: #5fb19e;
+            --background-color: #f4f7fa;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --accent-color: #34d399;
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), #2a6656);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        header img {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        header img:hover {
+            transform: scale(1.1);
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* header a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        } */
+
+        /* header a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        } */
+
+        header a:hover::after {
+            width: 200px;
+            height: 200px;
+        }
+
+        .container {
+            margin-top: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .detail-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .detail-card:nth-child(1) { animation-delay: 0.1s; }
+        .detail-card:nth-child(2) { animation-delay: 0.2s; }
+        .detail-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .detail-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-item strong {
+            color: var(--primary-color);
+            margin-right: 0.75rem;
+            font-weight: 600;
+        }
+
+        .update-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .update-btn:hover {
+            background: linear-gradient(135deg, #4d9686, #2bb981);
+            transform: translateY(-2px);
+        }
+
+        .update-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .update-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .update-btn::before {
+            content: 'Update Details';
+            display: none;
+            position: absolute;
+            background: #1e293b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+        }
+
+        .update-btn:hover::before {
+            display: block;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            height: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            header img {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center;">
+            <img src="/static/images/logo.png" alt="Logo">
+            <h2 style="margin-left: 0.5rem; font-size: 1.5rem;">JobElevate</h2>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Professional Details Dashboard</h1>
+        <div class="dashboard-grid">
+            {% if details %}
+                {% for detail in details %}
+                <div class="detail-card">
+                    <div class="detail-item"><strong>User:</strong> {{ detail.user.username }}</div>
+                    <div class="detail-item"><strong>Designation:</strong> {{ detail.designation }}</div>
+                    <div class="detail-item"><strong>Company:</strong> {{ detail.company }}</div>
+                    <div class="detail-item"><strong>Experience:</strong> {{ detail.experience }}</div>
+                    <div class="detail-item"><strong>Skills:</strong> {{ detail.skills }}</div>
+                    <div class="detail-item"><strong>10th Marks:</strong> {{ detail.tenth_marks }}</div>
+                    <div class="detail-item"><strong>12th Marks:</strong> {{ detail.twelfth_marks }}</div>
+                    <div class="detail-item"><strong>Graduation Degree:</strong> {{ detail.graduation_degree }}</div>
+                    <div class="detail-item"><strong>Graduation Institute:</strong> {{ detail.graduation_institute }}</div>
+                    <div class="detail-item"><strong>Graduation Year:</strong> {{ detail.graduation_year }}</div>
+                    <div class="detail-item"><strong>Location:</strong> {{ detail.location }}</div>
+                    <a href="{% url 'update_professional_details' detail.id %}" class="update-btn">Update</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="detail-card">
+                    <div class="skeleton"></div>
+                    <div class="skeleton"></div>
+                    <div class="skeleton"></div>
+                    <p style="text-align: center; color: #64748b;">No professional details available.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Optional: Add JavaScript for dynamic skeleton loading
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate data loading
+            setTimeout(() => {
+                document.querySelectorAll('.skeleton').forEach(el => el.classList.remove('skeleton'));
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

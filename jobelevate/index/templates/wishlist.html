@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Wishlist - JobElevate</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Reuse your existing CSS -->
+</head>
+<body>
+    <h1>My Job Wishlist</h1>
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <ul>
+    {% for item in wishlist_items %}
+        <li>{{ item.job.title }} - Priority: {{ item.get_priority_display }} (Added: {{ item.added_on }})</li>
+    {% empty %}
+        <li>No jobs in your wishlist yet!</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'job_list' %}">Back to Job Listings</a> | <a href="{% url 'home' %}">Home</a>
+</body>
+</html> 
